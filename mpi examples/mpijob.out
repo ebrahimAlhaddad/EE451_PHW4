@@ -1,0 +1,18 @@
+---------- Begin SLURM Prolog ----------
+Job ID:        4883542
+Username:      efalhadd
+Accountname:   lc_vkp2
+Name:          job.sl
+Partition:     quick
+Nodelist:      hpc[4345-4347,4350]
+TasksPerNode:  1(x4)
+CPUsPerTask:   Default[1]
+TMPDIR:        /tmp/4883542.quick
+SCRATCHDIR:    /staging/scratch/4883542
+Cluster:       uschpc
+HSDA Account:  false
+---------- 2019-10-27 22:43:14 ---------
+Process 1: 20 
+Process 2: 30 
+Process 3: 40 
+Process 0: 10 
