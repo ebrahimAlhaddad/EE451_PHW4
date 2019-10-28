@@ -27,27 +27,40 @@ int main(int argc, char** argv)
     }
     fclose(fp);
     
-    
+    int sum0,sum1,sum2,sum3;
     if(rank == 0){
-        
+        MPI_Recv(&sum1, 1, MPI_INT, 1, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+        MPI_Recv(&sum2, 1, MPI_INT, 2, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+        MPI_Recv(&sum3, 1, MPI_INT, 3, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+        sum0 = sum1 + sum2 + sum3;
+        printf("final Sum: %d",sum0);
     }
     else if(rank == 1){
-        MPI_Recv(&message, 1, MPI_INT, 0, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        message += 1;
-        MPI_Send(&message, 1, MPI_INT, 2, 200, MPI_COMM_WORLD);
-        printf("Process: %d. Message: %d \n", rank, message);
+        int* array = arr;
+        sum1 = 0;
+        int i;
+        for(i = 0; i < 16; i++){
+            sum1 += array[i];
+        }
+        MPI_Send(&sum1, 1, MPI_INT, 0, 200, MPI_COMM_WORLD);
     }
     else if(rank == 2){
-        MPI_Recv(&message, 1, MPI_INT, 1, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        message += 1;
-        MPI_Send(&message, 1, MPI_INT, 3, 200, MPI_COMM_WORLD);
-        printf("Process: %d. Message: %d \n", rank, message);
+        int* array = arr;
+        sum2 = 0;
+        int i;
+        for(i = 32; i < 48; i++){
+            sum2 += array[i];
+        }
+        MPI_Send(&sum2, 1, MPI_INT, 0, 200, MPI_COMM_WORLD);
     }
     else if(rank == 3){
-        MPI_Recv(&message, 1, MPI_INT, 2, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        message += 1;
-        MPI_Send(&message, 1, MPI_INT, 0, 200, MPI_COMM_WORLD);
-        printf("Process: %d. Message: %d \n", rank, message);
+      int* array = arr;
+      sum3 = 0;
+      int i;
+      for(i = 48; i < 64; i++){
+          sum3 += array[i];
+      }
+      MPI_Send(&sum3, 1, MPI_INT, 0, 200, MPI_COMM_WORLD);
     }
     
     
