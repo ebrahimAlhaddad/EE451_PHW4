@@ -41,8 +41,6 @@ int main(int argc, char** argv)
         for(i = 0; i < 16; i++){
             sum0 += array[i];
         }
-        MPI_Reduce(&sum0,&sum1,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
-        printf("Sum: %d",sum1);
         
     }
     if(rank == 1){
@@ -68,6 +66,10 @@ int main(int argc, char** argv)
       for(i = 48; i < 64; i++){
           sum0 += array[i];
       }
+    }
+    MPI_Reduce(&sum0,&sum1,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
+    if(rank == 0){
+        printf("Sum: %d",sum1);
     }
     
     
