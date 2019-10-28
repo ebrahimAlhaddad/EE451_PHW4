@@ -31,8 +31,9 @@ int main(int argc, char** argv)
     if(rank == 0){
         int *array = arr;
 	 sum0 = 0;
-        for(i = 0; i < 16; i++){
-            sum0 += array[i];
+	int l;
+        for(l = 0; l < 16; l++){
+            sum0 += array[l];
         }
         MPI_Recv(&sum1, 1, MPI_INT, 1, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
         MPI_Recv(&sum2, 1, MPI_INT, 2, 200, MPI_COMM_WORLD,MPI_STATUS_IGNORE);
@@ -44,9 +45,9 @@ int main(int argc, char** argv)
     else if(rank == 1){
         int* array = arr;
         sum1 = 0;
-        int i;
-        for(i = 16; i < 32; i++){
-            sum1 += array[i];
+        int r;
+        for(r = 16; r < 32; r++){
+            sum1 += array[r];
         }
         MPI_Send(&sum1, 1, MPI_INT, 0, 200, MPI_COMM_WORLD);
     }
@@ -54,8 +55,8 @@ int main(int argc, char** argv)
         int* array = arr;
         sum2 = 0;
         int j;
-        for(j = 32; j < 48; i++){
-            sum2 += array[i];
+        for(j = 32; j < 48; j++){
+            sum2 += array[j];
         }
         MPI_Send(&sum2, 1, MPI_INT, 0, 200, MPI_COMM_WORLD);
     }
@@ -63,8 +64,8 @@ int main(int argc, char** argv)
       int* array = arr;
       sum3 = 0;
       int k;
-      for(k = 48; k < 64; i++){
-          sum3 += array[i];
+      for(k = 48; k < 64; k++){
+          sum3 += array[k];
       }
       MPI_Send(&sum3, 1, MPI_INT, 0, 200, MPI_COMM_WORLD);
     }
