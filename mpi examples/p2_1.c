@@ -29,7 +29,8 @@ int main(int argc, char** argv)
     
     int sum0,sum1,sum2,sum3;
     if(rank == 0){
-        sum0 = 0;
+        int *array = arr;
+	 sum0 = 0;
         for(i = 0; i < 16; i++){
             sum0 += array[i];
         }
