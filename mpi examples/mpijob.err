@@ -1,0 +1,18 @@
+[hpc3110:43088] *** Process received signal ***
+[hpc3110:43088] Signal: Segmentation fault (11)
+[hpc3110:43088] Signal code: Address not mapped (1)
+[hpc3110:43088] Failing at address: 0x8acb50
+srun: error: hpc3110: task 2: Segmentation fault (core dumped)
+[hpc3116:46061] *** Process received signal ***
+[hpc3116:46061] Signal: Segmentation fault (11)
+[hpc3116:46061] Signal code: Address not mapped (1)
+[hpc3116:46061] Failing at address: 0x8acb50
+[hpc3109:26442] *** Process received signal ***
+[hpc3109:26442] Signal: Segmentation fault (11)
+[hpc3109:26442] Signal code: Address not mapped (1)
+[hpc3109:26442] Failing at address: 0x8acb50
+srun: error: hpc3116: task 3: Segmentation fault (core dumped)
+srun: error: hpc3109: task 1: Segmentation fault (core dumped)
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 4883860 ON hpc3038 CANCELLED AT 2019-10-28T01:35:06 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 4883860.0 ON hpc3038 CANCELLED AT 2019-10-28T01:35:06 DUE TO TIME LIMIT ***

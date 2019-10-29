@@ -35,39 +35,39 @@ int main(int argc, char** argv)
     MPI_Bcast(&arr, 64, MPI_INT, 0, MPI_COMM_WORLD);
 
     if(rank == 0){
-        int* array = arr;
+       
         sum0 = 0;
         int i;
         for(i = 0; i < 16; i++){
-            sum0 += array[i];
+            sum0 += arr[i];
         }
         
     }
     if(rank == 1){
-        int* array = arr;
+        
         sum0 = 0;
         int i;
         for(i = 16; i < 32; i++){
-            sum0 += array[i];
+            sum0 += arr[i];
         }
     }
     else if(rank == 2){
-        int* array = arr;
+        
         sum0 = 0;
         int i;
         for(i = 32; i < 48; i++){
-            sum0 += array[i];
+            sum0 += arr[i];
         }
     }
     else if(rank == 3){
-      int* array = arr;
+     
       sum0 = 0;
       int i;
       for(i = 48; i < 64; i++){
-          sum0 += array[i];
+          sum0 += arr[i];
       }
     }
-    MPI_Reduce(&sum0,&sum1,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
+    MPI_Reduce(sum0,sum1,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
     if(rank == 0){
         printf("Sum: %d",sum1);
     }
