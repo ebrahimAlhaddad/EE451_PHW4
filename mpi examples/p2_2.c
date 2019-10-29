@@ -13,8 +13,8 @@ int main(int argc, char** argv)
     int *arr = (int*)(malloc(sizeof(int)*64));
 
     
-    int sum0,sum1;
-    if(rank == 0){
+    int *sum0,*sum1;
+   
         int *arr = (int*)(malloc(sizeof(int)*64));
         FILE *fp;
            char str[MAXCHAR];
@@ -31,42 +31,49 @@ int main(int argc, char** argv)
             i += 1;
         }
         fclose(fp);
-    }
-    MPI_Bcast(&arr, 64, MPI_INT, 0, MPI_COMM_WORLD);
+    
+    int *array = (int*)(malloc(sizeof(int)*64));
+    
+    if(rank == 0)
+      {
+          array = arr;
+      }
+    MPI_Bcast(&array, 64, MPI_INT, 0, MPI_COMM_WORLD);
 
     if(rank == 0){
        
         sum0 = 0;
         int i;
         for(i = 0; i < 16; i++){
-            sum0 += arr[i];
+            sum0 += array[i];
         }
         
     }
     if(rank == 1){
         
         sum0 = 0;
-        int i;
-        for(i = 16; i < 32; i++){
-            sum0 += arr[i];
+        int j;
+        for(j = 16; j < 32; j++){
+            sum0 += array[j];
         }
     }
     else if(rank == 2){
         
         sum0 = 0;
-        int i;
-        for(i = 32; i < 48; i++){
-            sum0 += arr[i];
+        int k;
+        for(k = 32; k < 48; k++){
+            sum0 += array[k];
         }
     }
     else if(rank == 3){
      
       sum0 = 0;
-      int i;
-      for(i = 48; i < 64; i++){
-          sum0 += arr[i];
+      int r;
+      for(r = 48; r < 64; r++){
+          sum0 += array[r];
       }
     }
+    
     MPI_Reduce(sum0,sum1,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
     if(rank == 0){
         printf("Sum: %d",sum1);
